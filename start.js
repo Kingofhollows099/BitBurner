@@ -1,7 +1,4 @@
 /** @param {NS} ns */
-
-//I have no idea whatmost of this is, its just what I run every time I rebirth. 
-//I probably programed it at like 5am and it looks super bad. Don't judge me on this one... please
 export async function main(ns) {
 var servers = ["home"]
 var i = 0
@@ -17,21 +14,46 @@ while (i < servers.length) {
       }
     }
   }
+servers.shift()
 debugger
-//this distributes the basic hack grow and weaken scripts over all available servers
+await ns.sleep(1000)
+
+ns.tprint("Distributing Basics.")
 for (var i = 0; i < servers.length; i++) {
-  ns.scp(ns.ls("home", "startDist/"), servers[i], "home")
+  ns.scp(ns.ls("home", "basics/"), servers[i], "home")
 }
+await ns.sleep(1000)
+ns.tprint('Done distributing.')
+
+await ns.sleep(1000)
+
+ns.tprint("AutoTargeting.js initiating.")
+await ns.sleep(1000)
+ns.run("AutoTargeting.js", 1, "start")
+
+await ns.sleep(2000)
+
+ns.tprint("Distributing Barrage.js in")
+await ns.sleep(1000)
+ns.tprint("3...")
+await ns.sleep(1000)
+ns.tprint("2...")
+await ns.sleep(1000)
+ns.tprint("1...")
+await ns.sleep(1000)
+ns.tprint("Distributing.")
+ns.run("distribute.js")
+/**
 i = 0
 while(true){
-  if(i == 6) {
+  if(i >= 6) {
     var i = 0
   }
 
   var tgt = servers[i]
 
   if (ns.hasRootAccess(tgt) == true) {
-    ns.nuke(tgt) //Nuke gives root access to the target server, as long as the required # of ports are open
+    ns.nuke(tgt)
   }
   else {
     i += 1
@@ -43,4 +65,5 @@ while(true){
     i += 1
     }
   } 
+*/
 }

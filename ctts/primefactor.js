@@ -2,7 +2,7 @@
 export async function main(ns) {
 //36639359
 const max = 36639359
-const digits = Range(0,10)
+const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 var i = 2
 
 while(true) {
