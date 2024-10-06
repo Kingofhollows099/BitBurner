@@ -165,6 +165,9 @@ export async function main(ns) {
      */
     function ramAndExistanceCheck(server) {
       var passthrough = 0
+      if (server == "home") {
+        return true
+      }
       if (!ns.args.includes("-f")) {
         if (checkForExistingDistributionFile(server)) {
           previouslyExistant += "\n " + server
