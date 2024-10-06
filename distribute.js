@@ -210,8 +210,8 @@ export async function main(ns) {
           distribute(server)
           print("Deployed.")
         }
+        await ns.sleep(50)
       }
-      await ns.sleep(50)
     }
     if (previouslyExistant.length > 0) {
       print("\n\n" + "~~~~~ The following servers already have the script. use -f to overwrite: ~~~~~~" + "\n" + previouslyExistant + "\n\n")
