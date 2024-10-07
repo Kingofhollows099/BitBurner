@@ -37,7 +37,6 @@ export async function main(ns) {
         return 1
       }
       else {
-        numFailed += 1
         return 0
       }
     }
@@ -99,7 +98,6 @@ export async function main(ns) {
         return true
       }
       else {
-        numPreviouslyExistant += 1
         return false
       }
     }
@@ -176,6 +174,7 @@ export async function main(ns) {
       if (!ns.args.includes("-f")) {
         if (checkForExistingDistributionFile(server)) {
           previouslyExistant += "\n " + server
+          numPreviouslyExistant += 1
         }
         else {
           passthrough += 1
@@ -228,6 +227,7 @@ export async function main(ns) {
       print("\n\n" + "~~~~~ The following servers have no ram: ~~~~~~" + "\n" + noRam)
     }
     print(
+      "\n\n" +
       "\nDistributed: " + numSucceeded.toString() +
       "\nFailed: " + numFailed.toString() +
       "\nAlready Existed: " + numPreviouslyExistant.toString()
