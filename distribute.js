@@ -4,7 +4,10 @@ export async function main(ns) {
     var args = arguments
     var noRam = ""
     var previouslyExistant = ""
+    var numPreviouslyExistant = 0
     var file = null
+    var numFailed = 0
+    var numSucceeded = 0
   
     /**
      * Checks if there is a file specified for distribution.
@@ -34,6 +37,7 @@ export async function main(ns) {
         return 1
       }
       else {
+        numFailed += 1
         return 0
       }
     }
@@ -95,6 +99,7 @@ export async function main(ns) {
         return true
       }
       else {
+        numPreviouslyExistant += 1
         return false
       }
     }
@@ -205,10 +210,12 @@ export async function main(ns) {
         print("Deploying to " + server + "...")
         if (ns.getServerNumPortsRequired(server) > getAvailablePorts(server) && server != "home") {
           print("Failed to deploy. Hackable ports: " + getAvailablePorts(server) + " / " + ns.getServerNumPortsRequired(server))
+          numFailed += 1
         }
         else {
           distribute(server)
           print("Deployed.")
+          numSucceeded += 1
         }
         await ns.sleep(50)
       }
@@ -220,4 +227,9 @@ export async function main(ns) {
     if (noRam.length > 0) {
       print("\n\n" + "~~~~~ The following servers have no ram: ~~~~~~" + "\n" + noRam)
     }
+    print(
+      "\nDistributed: " + numSucceeded.toString() +
+      "\nFailed: " + numFailed.toString() +
+      "\nAlready Existed: " + numPreviouslyExistant.toString()
+    )
   }
