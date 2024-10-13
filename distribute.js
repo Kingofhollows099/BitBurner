@@ -169,7 +169,7 @@ export async function main(ns) {
      */
     function ramAndExistanceCheck(server) {
       var passthrough = 0
-      if (server == "home") {
+      if (server == "home" && ns.scriptRunning('barrage.js', 'home') == false) {
         return true
       }
       if (!ns.args.includes("-f")) {
